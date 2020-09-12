@@ -1,8 +1,8 @@
 import json
 import os
-from typing import Any, Dict
+from typing import Dict
 
-from agraffe import Agraffe
+from agraffe import Agraffe, Service
 
 from fastapi import FastAPI, Request
 
@@ -24,6 +24,11 @@ async def printf(request: Request) -> Dict[str, str]:
     return {}
 
 
-def entry_point(request: Any) -> Agraffe:
-    agraffe = Agraffe(app)
-    return agraffe(request)
+platform = os.environ.get("PLATFORM", "GCP")
+
+if platform == "GCP":
+    entry_point = Agraffe.entry_point(app, Service.google_cloud_functions)
+elif platform == "AWS":
+    entry_point = Agraffe.entry_point(app, Service.aws_lambda)
+else:
+    Exception(f"Unsupported platform of {platform}")
