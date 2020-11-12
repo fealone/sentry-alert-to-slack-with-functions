@@ -23,7 +23,7 @@ mkdir dist \
     && cp main.py dist/ \
     && pip install -r requirements.txt -t dist/ \
     && cd dist \
-    && zip ../dist.zip * \
+    && zip -r ../dist.zip * \
     && cd ../ \
     && rm -rf dist
 ```
@@ -35,7 +35,7 @@ aws lambda create-function \
     --function-name sentry-alert-to-slack-with-functions \
     --runtime python3.7 \
     --role {LambdaExecuteRole} \
-    --handler entry_point \
+    --handler main.entry_point \
     --zip-file fileb://dist.zip \
     --environment "Variables={SLACK_ENDPOINT={SLACK_WEBHOOK_ENDPOINT},PLATFORM=AWS}"
 ```

@@ -7,7 +7,7 @@ authors = ["fealone <fealone@lonesec.com>"]
 [tool.poetry.dependencies]
 python = "^3.7"
 fastapi = "^0.61.1"
-agraffe = "0.2.0"
+agraffe = "^0.3.0"
 requests = "^2.24.0"
 
 [tool.poetry.dev-dependencies]

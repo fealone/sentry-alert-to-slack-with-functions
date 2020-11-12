@@ -12,7 +12,7 @@ app = FastAPI()
 
 
 @app.post("/sentry")
-async def printf(request: Request) -> Dict[str, str]:
+async def sentry(request: Request) -> Dict[str, str]:
     body = await request.json()
     payload = {"text": (f"An error occurred, for details from the issue below url."
                         f"\r\n{body['url']}")}
